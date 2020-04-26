@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_exoplayer/audio_notification.dart';
 import 'package:flutter_exoplayer/audioplayer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:grande_serra/models/radios.dart';
 import 'package:volume/volume.dart';
 
 class Player extends StatefulWidget {
-  final _streaming;
+  RadiosModel radio;
 
-  Player(this._streaming);
+  Player(this.radio);
 
   @override
   _PlayerState createState() => _PlayerState();
@@ -16,14 +17,13 @@ class Player extends StatefulWidget {
 class _PlayerState extends State<Player> {
   bool _statusPlay = false;
   int maxVol, currentVol;
+  String _currentUrl;
   AudioPlayer _audioPlayer = AudioPlayer();
 
   Future<void> _play() async {
     setState(() {
       this._statusPlay = true;
     });
-
-    print(widget._streaming);
 
     _audioPlayer.release();
 
@@ -36,16 +36,12 @@ class _PlayerState extends State<Player> {
       notificationActionCallbackMode: NotificationActionCallbackMode.CUSTOM
     );
 
-    play(){
-      print('aki');
-    }
-
     final Result result = await _audioPlayer.play(
-      widget._streaming.toString(),
+      widget.radio.url,
       repeatMode: true,
       respectAudioFocus: true,
       audioNotification: audioObject,
-      playerMode: PlayerMode.FOREGROUND,
+//      playerMode: PlayerMode.FOREGROUND,
     );
 
     if (result == Result.ERROR) {
@@ -78,6 +74,8 @@ class _PlayerState extends State<Player> {
     super.initState();
     this._updateVolumes();
     AudioPlayer.logEnabled = true;
+    _currentUrl = widget.radio.url;
+    _setVol(currentVol);
   }
 
   _setVol(int i) async {
@@ -86,6 +84,14 @@ class _PlayerState extends State<Player> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.radio.url);
+
+    if(_currentUrl != widget.radio.url){
+      _currentUrl = widget.radio.url;
+      _stop();
+      _play();
+    }
+
     return Column(
       children: <Widget>[
         GestureDetector(
@@ -109,7 +115,7 @@ class _PlayerState extends State<Player> {
             child: Row(
               children: <Widget>[
                 Icon(
-                  (currentVol > 0)
+                  (currentVol != null && currentVol > 0)
                       ? FontAwesomeIcons.volumeUp
                       : FontAwesomeIcons.volumeMute,
                   color: Color(0xFFFF482D),

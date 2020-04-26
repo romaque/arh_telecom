@@ -1,10 +1,10 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:grande_serra/models/radios.dart';
 
 class RadioModal extends StatefulWidget {
-  final ValueChanged<String> onCodeChanged;
+  final ValueChanged<RadiosModel> onCodeChanged;
 
   RadioModal({this.onCodeChanged});
 
@@ -13,23 +13,13 @@ class RadioModal extends StatefulWidget {
 }
 
 class _RadioModalState extends State<RadioModal> {
-  var _RadioModals = [
-    {
-      'slug': 'araripina',
-      'title': 'Araripina',
-      'streaming': 'https://araripina.radiograndeserra.com.br/;'
-    },
-    {
-      'slug': 'ouricuri',
-      'title': 'Ouricuri',
-      'streaming': 'https://ouricuri.radiograndeserra.com.br/;'
-    }
+  List<RadiosModel> _RadioModals = [
+    RadiosModel('Araripina', 'https://araripina.radiograndeserra.com.br/;', 'araripina'),
+    RadiosModel('Ouricuri', 'https://ouricuri.radiograndeserra.com.br/;', 'ouricuri')
   ];
 
   _changeRadio(item){
-    String str = json.encode(item);
-
-    widget.onCodeChanged(str);
+    widget.onCodeChanged(item);
     Navigator.of(context).pop();
   }
 
@@ -68,7 +58,7 @@ class _RadioModalState extends State<RadioModal> {
                         width: 10.0,
                       ),
                       Text(
-                        item['title'].toUpperCase(),
+                        item.title.toUpperCase(),
                         style: TextStyle(
                             fontSize: 17.0,
                             decoration: TextDecoration.none,
