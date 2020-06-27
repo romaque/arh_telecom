@@ -105,7 +105,5 @@ String removeAllHtmlTags(String htmlText) {
 
   var expload = horario.split("\r\n");
 
-  print(expload[0] + expload[1]);
-
   return expload[0] + expload[1];
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:grande_serra/screen/home_screen.dart';
 import 'package:grande_serra/screen/music_screen.dart';
@@ -6,7 +5,6 @@ import 'package:grande_serra/screen/programs_screen.dart';
 import 'package:grande_serra/widget/bottom_navigation.dart';
 
 import 'layouts/main.dart';
-import 'modals/radio_modal.dart';
 import 'models/radios.dart';
 
 void main() {
@@ -32,8 +30,9 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     super.initState();
     this.radio = RadiosModel(
-        'Araripina', 'https://araripina.radiograndeserra.com.br/;',
-        'araripina');
+        'Araripina', 'https://streaming.rmpsite.com.br/rgsararipina/;',
+        'araripina', logo: 'images/logo_araripina.png'
+    );
   }
 
   _changeRadio(radio) {
@@ -49,10 +48,11 @@ class _HomeViewState extends State<HomeView> {
         home: Scaffold(
           bottomNavigationBar: BottomNavigation(_pageController),
           body: PageView(
+            physics:new NeverScrollableScrollPhysics(),
             controller: _pageController,
             children: [
               MainLayout(radio: radio, body: [
-                HomeScreen(radio),
+                HomeScreen(radio,  radioSet: _changeRadio),
               ], radioSet: _changeRadio),
 
               MainLayout(radio: radio, body: [

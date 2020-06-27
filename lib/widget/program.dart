@@ -24,7 +24,7 @@ class _ProgramState extends State<Program> {
   }
 
   _getTimeProgram() {
-    Timer timer = new Timer(new Duration(seconds: 10), () {
+    Timer timer = new Timer(new Duration(seconds: 20), () {
       _getPrograma();
       _getTimeProgram();
     });
@@ -51,7 +51,8 @@ class _ProgramState extends State<Program> {
         if (snapshot.hasData) {
           this._getPrograma();
 
-          return Container(
+          return snapshot.data.image != "null" ? Container(
+            padding:  EdgeInsets.only(left: 10.0, right: 10.0),
             margin: EdgeInsets.only(left: 20.0, right: 20.0),
             decoration: BoxDecoration(
                 color: Color(0xFFFFFFFF).withOpacity(0.1),
@@ -67,11 +68,11 @@ class _ProgramState extends State<Program> {
                     heightFactor: 0.90,
                     widthFactor: 0.99,
                     alignment: Alignment.center,
-                    child: Image.network(snapshot.data.image),
+                    child: Image.network(snapshot.data.image, width: 100.0,),
                   ),
                 ),
                 SizedBox(
-                  width: 20.0,
+                  width: 10.0,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +82,7 @@ class _ProgramState extends State<Program> {
                       style: TextStyle(
                           decoration: TextDecoration.none,
                           color: Color(0xFFF7B200),
-                          fontSize: 20.0,
+                          fontSize: 19.0,
                           fontFamily: 'Montserrat',
                       fontWeight: FontWeight.bold),
                     ),
@@ -130,9 +131,9 @@ class _ProgramState extends State<Program> {
                 )
               ],
             ),
-          );
+          ): Container();
         } else if (snapshot.hasError) {
-          return Text("${snapshot.error}");
+          return Container();
         }
 
         return CircularProgressIndicator();

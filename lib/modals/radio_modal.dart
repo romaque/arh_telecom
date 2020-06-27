@@ -14,8 +14,8 @@ class RadioModal extends StatefulWidget {
 
 class _RadioModalState extends State<RadioModal> {
   List<RadiosModel> _RadioModals = [
-    RadiosModel('Araripina', 'https://araripina.radiograndeserra.com.br/;', 'araripina'),
-    RadiosModel('Ouricuri', 'https://ouricuri.radiograndeserra.com.br/;', 'ouricuri')
+    RadiosModel('Araripina', 'https://streaming.rmpsite.com.br/rgsararipina/;', 'araripina', logo: 'images/logo_araripina.png'),
+    RadiosModel('Ouricuri', 'https://streaming.rmpsite.com.br/rgsouricuri/;', 'ouricuri', logo: 'images/logo_ouricuri.png')
   ];
 
   _changeRadio(item){

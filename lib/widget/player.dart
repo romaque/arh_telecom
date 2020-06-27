@@ -29,11 +29,10 @@ class _PlayerState extends State<Player> {
 
     AudioNotification audioObject = AudioNotification(
       smallIconFileName: "ic_launcher",
-      title: "Radio Grande Serra",
+      title: "AO VIVO",
+      subTitle: "Radio Grande Serra",
       isLocal: false,
       notificationDefaultActions: NotificationDefaultActions.ALL,
-      notificationCustomActions: NotificationCustomActions.TWO,
-      notificationActionCallbackMode: NotificationActionCallbackMode.CUSTOM
     );
 
     final Result result = await _audioPlayer.play(
@@ -41,7 +40,8 @@ class _PlayerState extends State<Player> {
       repeatMode: true,
       respectAudioFocus: true,
       audioNotification: audioObject,
-//      playerMode: PlayerMode.FOREGROUND,
+      //playerMode: PlayerMode.FOREGROUND,
+      position: Duration(milliseconds: 0)
     );
 
     if (result == Result.ERROR) {
@@ -73,7 +73,7 @@ class _PlayerState extends State<Player> {
   void initState() {
     super.initState();
     this._updateVolumes();
-    AudioPlayer.logEnabled = true;
+    AudioPlayer.logEnabled = false;
     _currentUrl = widget.radio.url;
     _setVol(currentVol);
   }
@@ -84,8 +84,6 @@ class _PlayerState extends State<Player> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.radio.url);
-
     if(_currentUrl != widget.radio.url){
       _currentUrl = widget.radio.url;
       _stop();

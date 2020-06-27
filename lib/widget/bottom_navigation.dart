@@ -30,7 +30,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           BottomNavigationBarItem(
               title: const Text(
                 'aovivo',
-                style: TextStyle(color: Color(0xFFF7B200), fontSize: 18.0),
+                style: TextStyle(color: Color(0xFFF7B200), fontSize: 17.0),
               ),
               icon: Icon(
                 FontAwesomeIcons.headphonesAlt,
@@ -40,7 +40,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           BottomNavigationBarItem(
               title: const Text(
                 'programação',
-                style: TextStyle(color: Color(0xFFF7B200), fontSize: 18.0),
+                style: TextStyle(color: Color(0xFFF7B200), fontSize: 17.0),
               ),
               icon: Icon(
                 FontAwesomeIcons.solidClock,
@@ -50,7 +50,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           BottomNavigationBarItem(
               title: const Text(
                 'pedir musica',
-                style: TextStyle(color: Color(0xFFF7B200), fontSize: 18.0),
+                style: TextStyle(color: Color(0xFFF7B200), fontSize: 17.0),
               ),
               icon: Icon(
                 FontAwesomeIcons.music,

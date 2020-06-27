@@ -40,8 +40,6 @@ Future<List<ProgramModel>> fetchPrograms(String slug) async {
   final res = await http.get('https://radiograndeserra.com.br/wp-json/wp/v2/programacao/programas?radio='+ slug);
 
   if (res.statusCode == 200) {
-    print(res.statusCode);
-
     List<dynamic> body = jsonDecode(res.body);
 
     List<ProgramModel> programs = body

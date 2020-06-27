@@ -49,6 +49,14 @@ class _MusicScreenState extends State<MusicScreen>
         _success = true;
         _carregando = false;
       });
+
+      Future.delayed(
+        Duration(seconds: 10),
+        () {
+          setState(() {
+            _success = false;
+          });
+        });
     }
   }
 

@@ -29,6 +29,7 @@ dependencies:
   http: ^0.12.0+2
   shared_preferences: any
   flutter_html: ^0.11.1
+  flutter_launcher_icons: "^0.7.3"
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +51,7 @@ flutter:
   assets:
     - images/background.png
     - images/logo_araripina.png
+    - images/logo_ouricuri.png
     - images/deixa_rolar.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -69,4 +71,8 @@ flutter:
         - asset: fonts/Montserrat_Bold.ttf
         - asset: fonts/Montserrat_Regular.ttf
           weight: 700
-
+# flutter pub run flutter_launcher_icons:main
+flutter_icons:
+  android: "launcher_icon"
+  ios: false
+  image_path: "images/app_icon.png"

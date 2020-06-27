@@ -59,7 +59,8 @@ class _MainLayoutState extends State<MainLayout> {
                     SizedBox(
                       width: 5.0,
                     ),
-                    Image.asset('images/logo_araripina.png'),
+                    Image.asset(widget.radio.logo, width: 170.0,),
+                    Spacer(),
                     GestureDetector(
                       onTap: this._changeRadio,
                       child: Container(
