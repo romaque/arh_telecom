@@ -24,23 +24,22 @@ class _HomeScreenState extends State<HomeScreen>
   void initState() {
     super.initState();
 
-    Future.delayed(
-        Duration(seconds: 1),
-        () {
-          print(ModalRoute.of(context).settings.name);
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return RadioModal(
-                onCodeChanged: (radio) {
-                  setState(() {
-                    widget.radio = radio;
-                    widget.radioSet(radio);
-                  });
-                },
-              );
-            });
-        });
+    Future.delayed(Duration(seconds: 1), () {
+      print(ModalRoute.of(context).settings.name);
+      showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (BuildContext context) {
+            return RadioModal(
+              onCodeChanged: (radio) {
+                setState(() {
+                  widget.radio = radio;
+                  widget.radioSet(radio);
+                });
+              },
+            );
+          });
+    });
   }
 
   @override
@@ -51,13 +50,10 @@ class _HomeScreenState extends State<HomeScreen>
         SizedBox(
           height: 20.0,
         ),
-
         Program(widget.radio),
-
         SizedBox(
-          height: 30.0,
+          height: 20.0,
         ),
-
         Player(widget.radio)
       ],
     );

@@ -28,21 +28,19 @@ class _PlayerState extends State<Player> {
     _audioPlayer.release();
 
     AudioNotification audioObject = AudioNotification(
-      smallIconFileName: "ic_launcher",
+      smallIconFileName: "mipmap/launcher_icon",
       title: "AO VIVO",
       subTitle: "Radio Grande Serra",
       isLocal: false,
-      notificationDefaultActions: NotificationDefaultActions.ALL,
+      notificationDefaultActions: NotificationDefaultActions.NONE,
     );
 
-    final Result result = await _audioPlayer.play(
-      widget.radio.url,
-      repeatMode: true,
-      respectAudioFocus: true,
-      audioNotification: audioObject,
-      //playerMode: PlayerMode.FOREGROUND,
-      position: Duration(milliseconds: 0)
-    );
+    final Result result = await _audioPlayer.play(widget.radio.url,
+        repeatMode: true,
+        respectAudioFocus: true,
+        audioNotification: audioObject,
+        playerMode: PlayerMode.FOREGROUND,
+        position: Duration(milliseconds: 0));
 
     if (result == Result.ERROR) {
       print("something went wrong in play method :(");
@@ -84,7 +82,7 @@ class _PlayerState extends State<Player> {
 
   @override
   Widget build(BuildContext context) {
-    if(_currentUrl != widget.radio.url){
+    if (_currentUrl != widget.radio.url) {
       _currentUrl = widget.radio.url;
       _stop();
       _play();

@@ -17,6 +17,7 @@ class MainLayout extends StatefulWidget {
 class _MainLayoutState extends State<MainLayout> {
   _changeRadio() {
     showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (BuildContext context) {
           return RadioModal(
@@ -59,7 +60,10 @@ class _MainLayoutState extends State<MainLayout> {
                     SizedBox(
                       width: 5.0,
                     ),
-                    Image.asset(widget.radio.logo, width: 170.0,),
+                    Image.asset(
+                      widget.radio.logo,
+                      width: 170.0,
+                    ),
                     Spacer(),
                     GestureDetector(
                       onTap: this._changeRadio,

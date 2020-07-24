@@ -13,7 +13,7 @@ void main() {
   ));
 }
 
-class HomeView extends StatefulWidget{
+class HomeView extends StatefulWidget {
   @override
   _HomeViewState createState() => _HomeViewState();
 }
@@ -29,10 +29,8 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
-    this.radio = RadiosModel(
-        'Araripina', 'https://streaming.rmpsite.com.br/rgsararipina/;',
-        'araripina', logo: 'images/logo_araripina.png'
-    );
+    this.radio = RadiosModel('Araripina', '', 'araripina',
+        logo: 'images/logo_araripina.png');
   }
 
   _changeRadio(radio) {
@@ -48,23 +46,29 @@ class _HomeViewState extends State<HomeView> {
         home: Scaffold(
           bottomNavigationBar: BottomNavigation(_pageController),
           body: PageView(
-            physics:new NeverScrollableScrollPhysics(),
+            physics: new NeverScrollableScrollPhysics(),
             controller: _pageController,
             children: [
-              MainLayout(radio: radio, body: [
-                HomeScreen(radio,  radioSet: _changeRadio),
-              ], radioSet: _changeRadio),
-
-              MainLayout(radio: radio, body: [
-                ProgramsScreen(radio),
-              ], radioSet: _changeRadio),
-
-              MainLayout(radio: radio, body: [
-                MusicScreen(radio),
-              ], radioSet: _changeRadio),
+              MainLayout(
+                  radio: radio,
+                  body: [
+                    HomeScreen(radio, radioSet: _changeRadio),
+                  ],
+                  radioSet: _changeRadio),
+              MainLayout(
+                  radio: radio,
+                  body: [
+                    ProgramsScreen(radio),
+                  ],
+                  radioSet: _changeRadio),
+              MainLayout(
+                  radio: radio,
+                  body: [
+                    MusicScreen(radio),
+                  ],
+                  radioSet: _changeRadio),
             ],
           ),
-        )
-    );
+        ));
   }
 }

@@ -27,10 +27,9 @@ dependencies:
   flutter_exoplayer: ^0.5.5
   volume: ^0.1.0
   http: ^0.12.0+2
-  shared_preferences: any
+  shared_preferences: ^0.5.8
   flutter_html: ^0.11.1
   flutter_launcher_icons: "^0.7.3"
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
