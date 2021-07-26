@@ -24,12 +24,12 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   font_awesome_flutter: ^8.2.0
-  flutter_exoplayer: ^0.5.5
+  flutter_exoplayer: ^0.6.1
   volume: ^0.1.0
   http: ^0.12.0+2
   shared_preferences: ^0.5.8
   flutter_html: ^0.11.1
-  flutter_launcher_icons: "^0.7.3"
+  flutter_launcher_icons: ^0.9.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -51,6 +51,7 @@ flutter:
     - images/background.png
     - images/logo_araripina.png
     - images/logo_ouricuri.png
+    - images/logo_cambua.png
     - images/deixa_rolar.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
