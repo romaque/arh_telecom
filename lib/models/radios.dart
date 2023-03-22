@@ -1,34 +1,30 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 
 class RadiosModel {
   final String title;
   final String url;
-  final String slug;
-  final String logo;
+  final String facebook;
+  final String whatsapp;
+  final String instagram;
+  final String youtube;
 
-  RadiosModel(this.title, this.url, this.slug, {this.logo});
+  RadiosModel({
+    this.title,
+    this.url,
+    this.youtube,
+    this.instagram,
+    this.whatsapp,
+    this.facebook,
+  });
 
   factory RadiosModel.fromJson(Map<String, dynamic> json) {
-    return RadiosModel(json['title'], json['url'], json['slug'],
-        logo: json['logo']);
-  }
-}
-
-Future<List<RadiosModel>> fetchRadio() async {
-  final res = await http.get('https://radiograndeserra.com.br/streaming.json');
-
-  if (res.statusCode == 200) {
-    List<dynamic> body = jsonDecode(res.body);
-
-    List<RadiosModel> programs = body
-        .map(
-          (dynamic item) => RadiosModel.fromJson(item),
-        )
-        .toList();
-
-    return programs;
-  } else {
-    throw "Can't get radio.";
+    return RadiosModel(
+      title: json['title'],
+      url: json['url'],
+      youtube: json['youtube'],
+      instagram: json['instagram'],
+      whatsapp: json['whatsapp'],
+      facebook: json['facebook'],
+    );
   }
 }
