@@ -10,6 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(new MaterialApp(
+    debugShowCheckedModeBanner: false,
     home: HomeView(),
   ));
 }
@@ -103,13 +104,14 @@ class _HomeViewState extends State<HomeView> {
 
     return MaterialApp(
       theme: ThemeData(fontFamily: 'Montserrat'),
+      debugShowCheckedModeBanner: false,
       home: this.radio == null
           ? Scaffold(
               body: Stack(
                 children: <Widget>[
                   Container(
                     child: Image.asset(
-                      'images/bg_inicio.png',
+                      'images/bg_inicio.jpeg',
                       fit: BoxFit.cover,
                       width: width,
                       height: height,
@@ -231,8 +233,8 @@ class _HomeViewState extends State<HomeView> {
                   Container(
                     child: Image.asset(
                       this.radio.title == 'ARARIPINA - PE'
-                          ? 'images/bg_app_araripina.png'
-                          : 'images/bg_app.png',
+                          ? 'images/bg_app_araripina.jpeg'
+                          : 'images/bg_app.jpeg',
                       fit: BoxFit.cover,
                       width: width,
                       height: height,

@@ -14,8 +14,7 @@ class MainLayout extends StatefulWidget {
 }
 
 class _MainLayoutState extends State<MainLayout> {
-  _changeRadio() {
-  }
+  _changeRadio() {}
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,7 @@ class _MainLayoutState extends State<MainLayout> {
       children: <Widget>[
         Container(
           child: Image.asset(
-            'images/bg_app.png',
+            'images/bg_app.jpeg',
             fit: BoxFit.cover,
             width: width,
             height: height,
