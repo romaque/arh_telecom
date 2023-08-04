@@ -7,6 +7,8 @@ class RadiosModel {
   final String whatsapp;
   final String instagram;
   final String youtube;
+  final String cidade;
+  final String video;
 
   RadiosModel({
     required this.title,
@@ -15,6 +17,8 @@ class RadiosModel {
     required this.instagram,
     required this.whatsapp,
     required this.facebook,
+    required this.cidade,
+    required this.video,
   });
 
   factory RadiosModel.fromJson(Map<String, dynamic> json) {
@@ -25,6 +29,8 @@ class RadiosModel {
       instagram: json['instagram'],
       whatsapp: json['whatsapp'],
       facebook: json['facebook'],
+      cidade: json['cidade'],
+      video: json['video'],
     );
   }
 }

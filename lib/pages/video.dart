@@ -11,6 +11,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoView extends StatefulWidget {
+  final String video;
+
+  VideoView(this.video);
   @override
   _VideoViewState createState() => _VideoViewState();
 }
@@ -20,43 +23,16 @@ class _VideoViewState extends State<VideoView> {
   late VideoPlayerController _controller;
   bool acao = false;
 
-  List<RadiosModel> radios = [
-    RadiosModel(
-      title: 'ARARIPINA - PE',
-      url: 'https://araripina.grandeserra.com.br/streaming.mp3',
-      youtube: 'https://www.youtube.com/@grandeserrafm909',
-      instagram: 'https://www.instagram.com/grandeserrafm/',
-      whatsapp: 'https://api.whatsapp.com/send?phone=558792091545819',
-      facebook: 'https://www.facebook.com/grandeserrafm',
-    ),
-    RadiosModel(
-      title: 'OURICURI - PE',
-      url: 'https://ouricuri.grandeserra.com.br/streaming.mp3',
-      youtube: 'https://www.youtube.com/@GrandeSerraOuricuri',
-      instagram: 'https://www.instagram.com/grandeserraouricuri/',
-      whatsapp: 'https://api.whatsapp.com/send?phone=5587991640342',
-      facebook: 'https://www.facebook.com/radiogsouricuri',
-    ),
-  ];
-
-  RadiosModel? radio;
-
   bool isPlaying = false;
-
-  set _setRadio(value) {
-    radio = value;
-  }
 
   @override
   void initState() {
     Wakelock.enable();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     super.initState();
-    radio = radios[0];
     super.initState();
     _controller = VideoPlayerController.networkUrl(
-      Uri.parse(
-          'https://video.grandeserra.com.br/hls/44c8efdcb40ce81a81830.m3u8'),
+      Uri.parse(widget.video),
     )..initialize().then((_) {
         setState(() {});
       });

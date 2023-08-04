@@ -3,6 +3,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:grande_serra/pages/video.dart';
+import 'package:grande_serra/utils/env.dart';
+import 'package:grande_serra/utils/request.dart';
 import 'package:radio_player/radio_player.dart';
 import '../models/radios.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,31 +17,58 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   final _pageController = PageController();
+  String _video = '';
 
   RadiosModel? radio;
   List<RadiosModel> radios = [
     RadiosModel(
-      title: 'ARARIPINA - PE',
+      title: 'Araripina',
       url: 'https://araripina.grandeserra.com.br/streaming.mp3',
       youtube: 'https://www.youtube.com/@grandeserrafm909',
       instagram: 'https://www.instagram.com/grandeserrafm/',
       whatsapp: 'https://api.whatsapp.com/send?phone=5587991470340',
       facebook: 'https://www.facebook.com/grandeserrafm',
+      cidade: 'Araripina',
+      video: '',
     ),
     RadiosModel(
-      title: 'OURICURI - PE',
+      title: 'Ouricuri',
       url: 'https://ouricuri.grandeserra.com.br/streaming.mp3',
       youtube: 'https://www.youtube.com/@GrandeSerraOuricuri',
       instagram: 'https://www.instagram.com/grandeserraouricuri/',
       whatsapp: 'https://api.whatsapp.com/send?phone=5587991640342',
       facebook: 'https://www.facebook.com/radiogsouricuri',
+      cidade: 'Ouricuri',
+      video: '',
     ),
   ];
 
   RadioPlayer _radioPlayer = RadioPlayer();
   bool isPlaying = false;
 
+  _getResults() {
+    httpCliente
+        .get(
+            '${urlApi}items/empresa?filter={"tag": {"_eq": "grandeserra"}}&sort=cidade')
+        .then((value) {
+      setState(() {
+        radios = List<RadiosModel>.from(value["data"].map((x) => RadiosModel(
+              title: x['cidade'],
+              url: x['audio'],
+              youtube: x['youtube'],
+              instagram: x['instagram'],
+              whatsapp: "https://api.whatsapp.com/send?phone=${x['whatsapp']}",
+              facebook: x['facebook'],
+              cidade: x['cidade'],
+              video: x['video'].toString(),
+            )));
+      });
+    });
+  }
+
   void initRadioPlayer() {
+    _getResults();
+
     _radioPlayer.setChannel(
       title: this.radio?.title ?? this.radios[0].title,
       url: this.radio?.url ?? this.radios[0].url,
@@ -64,6 +94,7 @@ class _HomeViewState extends State<HomeView> {
 
   _changeRadio(radio) {
     setState(() {
+      _video = radio.video;
       _radioPlayer.pause();
       this.radio = radio;
       _radioPlayer.setChannel(
@@ -168,7 +199,7 @@ class _HomeViewState extends State<HomeView> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    'Araripina',
+                                    radios[0].title,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 16.0,
@@ -198,7 +229,7 @@ class _HomeViewState extends State<HomeView> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    'Ouricuri',
+                                    radios[1].title,
                                     style: TextStyle(
                                       color: Color(0xFF492a5f),
                                       fontSize: 16.0,
@@ -225,7 +256,7 @@ class _HomeViewState extends State<HomeView> {
                 children: <Widget>[
                   Container(
                     child: Image.asset(
-                      this.radio!.title == 'ARARIPINA - PE'
+                      this.radio!.title == 'Araripina'
                           ? 'images/bg_app_araripina.jpeg'
                           : 'images/bg_app.jpeg',
                       fit: BoxFit.cover,
@@ -334,7 +365,11 @@ class _HomeViewState extends State<HomeView> {
                                                                     .w800),
                                                       ),
                                                       Text(
-                                                        this.radio!.title,
+                                                        this
+                                                                .radio!
+                                                                .title
+                                                                .toUpperCase() +
+                                                            ' - PE',
                                                         style: TextStyle(
                                                           color:
                                                               Color(0xFFffcc00),
@@ -398,14 +433,14 @@ class _HomeViewState extends State<HomeView> {
                                                           if (this
                                                                   .radio!
                                                                   .title !=
-                                                              "OURICURI - PE")
+                                                              "Ouricuri")
                                                             SizedBox(
                                                               width: 20.0,
                                                             ),
                                                           if (this
                                                                   .radio!
                                                                   .title !=
-                                                              "OURICURI - PE")
+                                                              "Ouricuri")
                                                             GestureDetector(
                                                               child: Column(
                                                                 children: [
@@ -453,10 +488,12 @@ class _HomeViewState extends State<HomeView> {
                                                               onTap: () {
                                                                 _radioPlayer
                                                                     .pause();
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pushNamed(
-                                                                        '/video');
+                                                                Navigator.push(
+                                                                    context,
+                                                                    MaterialPageRoute(
+                                                                        builder:
+                                                                            (context) =>
+                                                                                VideoView(_video)));
                                                               },
                                                             ),
                                                           Spacer(),

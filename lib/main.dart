@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:grande_serra/pages/inicio.dart';
-import 'package:grande_serra/pages/video.dart';
 
 void main() {
   runApp(new MaterialApp(
@@ -9,10 +8,7 @@ void main() {
     home: MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
-      routes: {
-        '/': (context) => HomeView(),
-        '/video': (context) => VideoView(),
-      },
+      routes: {'/': (context) => HomeView()},
     ),
   ));
 }
