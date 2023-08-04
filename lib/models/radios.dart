@@ -9,12 +9,12 @@ class RadiosModel {
   final String youtube;
 
   RadiosModel({
-    this.title,
-    this.url,
-    this.youtube,
-    this.instagram,
-    this.whatsapp,
-    this.facebook,
+    required this.title,
+    required this.url,
+    required this.youtube,
+    required this.instagram,
+    required this.whatsapp,
+    required this.facebook,
   });
 
   factory RadiosModel.fromJson(Map<String, dynamic> json) {
